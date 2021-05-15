@@ -43,3 +43,4 @@ Full RELRO      No canary found  NX enabled    PIE enabled     No RPATH   No RUN
             0x5621860071e9      0f1f80000000.  nop dword [rax]                                                                                                                                                                                
             ; DATA XREF from entry0 @ 0x5621860070ba    
 ```           
+Here we notice that ***rbp-0x110*** is what we need to focus on and then overwrite ***rbp-0x4*** with 0x69420. So we subtract 0x4 from 0x110 which gives us ***272-4=268***
