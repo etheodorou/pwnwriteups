@@ -8,7 +8,7 @@ First we run ***checksec --file=a.out*** to see any vulnerabilities and see ther
 Then we run ***r2 -Ad a.out*** to disassemble the file in debug mode and then enter ***s main*** to be taken to main and ***Vp*** to open visual.
 
 
-'''96: int main (int argc, char **argv, char **envp);                                                                                                                                                                                          
+```96: int main (int argc, char **argv, char **envp);                                                                                                                                                                                          
 │           ; var int64_t var_110h @ rbp-0x110                                                                                                                                                                                                
 │           ; var int64_t var_4h @ rbp-0x4                                                                                                                                                                                                    
 │           0x562186007189      f30f1efa       endbr64                                                                                                                                                                                        
@@ -35,4 +35,4 @@ Then we run ***r2 -Ad a.out*** to disassemble the file in debug mode and then en
 └           0x5621860071e8      c3             ret                                                                                                                                                                                            
             0x5621860071e9      0f1f80000000.  nop dword [rax]                                                                                                                                                                                
             ; DATA XREF from entry0 @ 0x5621860070ba    
-'''            
+```           
