@@ -14,7 +14,7 @@ Full RELRO      No canary found  NX enabled    PIE enabled     No RPATH   No RUN
 
 
 
-```console
+```assembly
 96: int main (int argc, char **argv, char **envp);                                                                                                                                                                                          
 │           ; var int64_t var_110h @ rbp-0x110                                                                                                                                                                                                
 │           ; var int64_t var_4h @ rbp-0x4                                                                                                                                                                                                    
