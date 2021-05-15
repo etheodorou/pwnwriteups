@@ -9,7 +9,7 @@ Then we run ***r2 -Ad a.out*** to disassemble the file in debug mode and then en
 
 ```console
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH	Symbols		FORTIFY	Fortified	Fortifiable	FILE
-Full RELRO      **No canary found**   NX enabled    PIE enabled     No RPATH   No RUNPATH   67) Symbols	  No	0		1		a.out
+Full RELRO      __No canary found__   NX enabled    PIE enabled     No RPATH   No RUNPATH   67) Symbols	  No	0		1		a.out
 ```
 
 
