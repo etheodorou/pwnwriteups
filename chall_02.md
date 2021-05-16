@@ -2,7 +2,6 @@
 
 ## Solution
 
-##### Disassembling
 
 First we run ```checksec --file=withoutpie``` to see any vulnerabilities and see there is ```No canary found``` and ```No PIE```. 
 
