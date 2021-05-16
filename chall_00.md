@@ -47,4 +47,4 @@ Here we notice that ```rbp-0x110``` is what we need to focus on and then overwri
 
 We hop on to ipython3 and ```from pwn import *``` and create a process with ```p = process ("./a.out")``` and send the junk to fill the space provided along with the new value we want to compare with ```p.sendline(b'A' * 268 + p32(0x69420))```
 
-After that we gain shell with ```p.interactive```.
+After that we gain shell with ```p.interactive```
