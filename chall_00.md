@@ -44,3 +44,5 @@ Full RELRO      No canary found  NX enabled    PIE enabled     No RPATH   No RUN
             ; DATA XREF from entry0 @ 0x5621860070ba    
 ```           
 Here we notice that ***rbp-0x110*** is what we need to focus on and then overwrite ***rbp-0x4*** with 0x69420. So we subtract ***0x4*** from ***0x110*** which gives us ***272-4=268***
+
+We hop on to ipython3 and ```from pwn import *``` and create a process with ```p = process ("./a.out")``` and send the junk to fill the space provided along with the new value we want to compare with.
