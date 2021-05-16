@@ -1,8 +1,0 @@
-<h1>Chall_00<h1>
-
-##Solution
-
-#####Disassembling the code
-
-Starting off we perform 'checksec' on **a.out** and we see that there is 'No canary found' 
-
