@@ -83,10 +83,8 @@ Then we run ```r2 -Ad a.out``` to disassemble the file in debug mode and then en
 
 We notice there is a ```main()``` function that calls a ```vuln()``` function which should return back to ```main()``` unless we reroute it to the ```win()``` function.
 
-So we need to send the program to the address that win starts which is ```0x08049182```. This time instead of subtracting we need to add ```0x71``` to ```0x4``` which 
-will give us the manipulation of the stack we need to send the program to ```0x08049182```. 
+So we need to send the program to the address that ```win()``` starts which is ```0x08049182```. This time instead of subtracting we need to add ```0x71``` to ```0x4``` which will give us the manipulation of the stack we need to send the program to ```0x08049182```. 
 
-We hop on to ipython3 and ```from pwn import *``` and create a process with ```p = process ("./withoutpie")``` and send the junk to fill the space provided along with the 
-new value we want to compare with ```p.sendline(b'A' * 117 + p32(0x08049182))```
+We hop on to ipython3 and ```from pwn import *``` and create a process with ```p = process ("./withoutpie")``` and send the junk to fill the space provided along with the new value we want to compare with ```p.sendline(b'A' * 117 + p32(0x08049182))```
 
 After that we gain shell with ```p.interactive```
