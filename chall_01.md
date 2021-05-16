@@ -2,7 +2,6 @@
 
 ## Solution
 
-##### Disassembling
 
 First we run ```checksec --file=a.out``` to see any vulnerabilities and see there is ```No canary found``` just like chall_00. 
 
