@@ -2,7 +2,7 @@
 
 ## Solution
 
-First we run a checksec on the file and see there is no canary and no PIE.
+First we run a checksec on the file and see there is ```no canary``` and ```no PIE```.
 
 Next we open the program in radare.
 
