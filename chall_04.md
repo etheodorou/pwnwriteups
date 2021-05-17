@@ -49,3 +49,4 @@ Next we open the program in radare.
 Here we see the space we need to fill come from the two variable ```0x60-0x8=88```
 
 So we run ```ipython``` and we import pwn and send the payload of ```p.sendline(b'A' * 88 + p64(0x00401176))``` with ```0x00401176``` being the address that takes us to main. 
+Next we ```interact``` and get root
