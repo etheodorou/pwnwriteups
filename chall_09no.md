@@ -61,3 +61,15 @@ This problem is a little more unique because when we run ```checksec``` we find 
 └           0x55828e6b627d      c3             ret                                                                                                                                                                 
             0x55828e6b627e      6690           nop
  ```
+
+We see that there is a ```for``` loop in this program that checks the length of input provided. So ```rbx``` and ```rax```. We also see that there is a second ```for``` loop that takes an address function called ```obj.key``` and adds its to the input and compares it with ```edx```. 
+
+If we dive deeper into the ```obj.key``` function we can find information in byte form.
+```console
+p8 @ obj.key
+3d01001a49001a074e1d49191e0700070e491d01001a49001a491b0c1f0c1b1a00070e454905000f0c49001a49084905000c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+```
+
+
+
+
