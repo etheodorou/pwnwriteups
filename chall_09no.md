@@ -62,7 +62,7 @@ This problem is a little more unique because when we run ```checksec``` we find 
             0x55828e6b627e      6690           nop
  ```
 
-We see that there is a ```for``` loop in this program that checks the length of input provided. So ```rbx``` and ```rax```. We also see that there is a second ```for``` loop that takes an address function called ```obj.key``` and adds its to the input and compares it with ```edx```. 
+We see that there is a ```for``` loop in this program that checks the length of input provided. So ```rbx``` and ```rax```. We also see that there is a second ```for``` loop that takes an address function called ```obj.key``` and adds its to the input and compares it with ```edx```. We also see that if the jump doesn't happen it gets added to ```0x69```.
 
 If we dive deeper into the ```obj.key``` function we can find information in byte form.
 ```console
@@ -71,8 +71,10 @@ p8 @ obj.key
 ```
 Now if we open ```ipython``` we can format and set up our payload. 
 ```python
-bytes.fromhex("3d01001a49001a074e1d49191e0700070e491d01001a49001a491b0c1f0c1b1
+In [1]: bytes.fromhex("3d01001a49001a074e1d49191e0700070e491d01001a49001a491b0c1f0c1b1
    ...: a00070e454905000f0c49001a49084905000c")
 Out[1]: b'=\x01\x00\x1aI\x00\x1a\x07N\x1dI\x19\x1e\x07\x00\x07\x0eI\x1d\x01\x00\x1aI\x00\x1aI\x1b\x0c\x1f\x0c\x1b\x1a\x00\x07\x0eEI\x05\x00\x0f\x0cI\x00\x1aI\x08I\x05\x00\x0c'
-
 ```
+
+Save it with ```python hex=_``` and use a ```pwn``` utility called ```xor``` to add the hex we just saved and ```0x69``` and get a little message of ```b"This isn't pwning this is reversing, life is a lie``` which is our key. So we connect with process and ```sendline(key)``` along with ```interactive()``` to get our shell.
+
