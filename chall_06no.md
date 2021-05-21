@@ -58,4 +58,4 @@ Next we open it with radare.
             0x5595482321fc      0f1f4000       nop dword [rax]    
 ```
 
-Now we hop on to ```ipython```. We can ```recvuntil``` the line ```I drink milk even though i'm lactose intolerant: ``` and then strip the result and we can then find our stack. We can start crafting our payload with ```payload = b'' ``` and ```payload += asm(shellcraft.sh())``` and we send that line. We then create a new payload and we have
+Now we hop on to ```ipython```. We can ```recvuntil``` the line ```I drink milk even though i'm lactose intolerant: ``` and then strip the result and we can then find our stack. We can start crafting our payload with ```payload = b'' ``` and ```payload += asm(shellcraft.sh())``` and we send that line. We then create a new payload and we have to do ```0x60-0x8``` and send that many pieces of junk followed by a ```p64(stack)```. We send it, interact and have shell. 
